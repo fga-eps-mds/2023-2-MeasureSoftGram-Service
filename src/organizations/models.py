@@ -7,7 +7,6 @@ from utils import staticfiles
 
 
 class Organization(models.Model):
-
     name = models.CharField(max_length=128)
     key = models.SlugField(max_length=128, unique=True, blank=True)
     description = models.TextField(
@@ -23,9 +22,9 @@ class Organization(models.Model):
     admin = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        related_name='admin_organizations',
+        related_name="admin_organizations",
         null=True,
-        blank=True
+        blank=True,
     )
 
     def save(self, *args, **kwargs):
@@ -33,7 +32,7 @@ class Organization(models.Model):
             self.key = slugify(self.name)
             while Organization.objects.filter(key=self.key).exists():
                 random_num = uuid4().hex[:6]
-                self.key = f'{self.key}-{random_num}'
+                self.key = f"{self.key}-{random_num}"
         return super().save(*args, **kwargs)
 
     def __str__(self):
@@ -41,12 +40,7 @@ class Organization(models.Model):
 
 
 class Product(models.Model):
-
-    class Meta:
-        unique_together = (("key", "organization"),)
-
     name = models.CharField(max_length=128)
-    key = models.SlugField(max_length=128, unique=True)
     description = models.TextField(
         max_length=512,
         null=True,
@@ -62,13 +56,6 @@ class Product(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        if not self.key:
-            self.key = slugify(self.name)
-            self.key = f"{self.organization.key}-{self.key}"
-            while Product.objects.filter(key=self.key).exists():
-                random_num = uuid4().hex[:6]
-                self.key = f'{self.key}-{random_num}'
-
         super().save(*args, **kwargs)
 
         PreConfig.objects.get_or_create(
@@ -77,7 +64,6 @@ class Product(models.Model):
 
 
 class Repository(models.Model):
-
     class Meta:
         unique_together = (("key", "product"),)
         verbose_name_plural = "Repositories"
