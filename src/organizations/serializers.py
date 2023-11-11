@@ -6,15 +6,17 @@ from organizations.models import Organization, Product, Repository
 from tsqmi.models import TSQMI
 from tsqmi.serializers import TSQMISerializer
 
+
 class OrganizationCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organization
-        fields = ('name',)
+        fields = ("name",)
 
     def save(self, **kwargs):
-        user = self.context['request'].user
+        user = self.context["request"].user
         organization = Organization.objects.create(admin=user, **self.validated_data)
         return organization
+
 
 class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
     products = serializers.SerializerMethodField()
@@ -68,6 +70,7 @@ class OrganizationSerializer(serializers.HyperlinkedModelSerializer):
             "create a new product": create_a_new_product_url,
         }
 
+
 class ProductSerializer(serializers.ModelSerializer):
     url = serializers.SerializerMethodField()
     repositories = serializers.SerializerMethodField()
@@ -87,11 +90,8 @@ class ProductSerializer(serializers.ModelSerializer):
             "description",
             "repositories",
             "actions",
-            "organization"
+            "organization",
         )
-        extra_kwargs = {
-            "key": {"read_only": True},
-        }
 
     def validate(self, attrs):
         """
