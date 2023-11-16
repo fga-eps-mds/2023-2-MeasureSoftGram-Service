@@ -42,7 +42,7 @@ CORS_ALLOW_CREDENTIALS = True
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-ALLOWERD_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
