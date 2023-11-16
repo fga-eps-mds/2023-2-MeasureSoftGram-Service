@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: gunicorn src.config.wsgi:application
+  web: gunicorn --pythonpath config config.wsgi  --log-file -
