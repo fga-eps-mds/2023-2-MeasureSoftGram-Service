@@ -35,6 +35,9 @@ jobs:
       - name: Instalar requirements
         run: pip install -r requirements.txt
 
+      - name: Setar variável de ambiente SECRET_KEY para testes
+        run: echo "SECRET_KEY=test_secret_key" >> $GITHUB_ENV
+
       - name: Instalar tox
         run: pip install tox
 
