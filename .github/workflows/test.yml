@@ -39,8 +39,6 @@ jobs:
         run: echo "SECRET_KEY=test_secret_key" >> $GITHUB_ENV
 
       - name: Instalar tox
-        env: 
-          - SECRET_KEY: "test_secret_key"
         run: pip install tox
 
       - name: Rodar testes
