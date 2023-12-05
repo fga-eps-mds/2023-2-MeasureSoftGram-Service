@@ -40,12 +40,12 @@ jobs:
 
       - name: Instalar tox
         env: 
-          SECRET_KEY: test_secret_key
+          - SECRET_KEY: "test_secret_key"
         run: pip install tox
 
       - name: Rodar testes
         env: 
-          SECRET_KEY: test_secret_key
+          - SECRET_KEY: "test_secret_key"
         run: tox
 
       - name: Rodar Migrations
