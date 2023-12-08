@@ -23,7 +23,7 @@ from measures.models import CalculatedMeasure, SupportedMeasure
 from metrics.models import CollectedMetric, SupportedMetric
 from organizations.models import Organization, Product, Repository
 from pre_configs.models import PreConfig
-from staticfiles import SONARQUBE_SUPPORTED_MEASURES
+from staticfiles import SUPPORTED_MEASURES
 from subcharacteristics.models import (
     CalculatedSubCharacteristic,
     SupportedSubCharacteristic,
@@ -66,7 +66,7 @@ class Command(BaseCommand):
         Função que popula banco de dados com todas as medidas que são
         suportadas atualmente e as métricas que cada medida é dependente
         """
-        for measure_data in SONARQUBE_SUPPORTED_MEASURES:
+        for measure_data in SUPPORTED_MEASURES:
             measure_key = list(measure_data.keys())[0]
             with contextlib.suppress(IntegrityError):
                 measure_name = utils.namefy(measure_key)

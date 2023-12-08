@@ -6,7 +6,7 @@ from organizations.models import Product
 from pre_configs.models import PreConfig
 from measures.models import SupportedMeasure
 from pre_configs.serializers import PreConfigSerializer
-from staticfiles import SONARQUBE_SUPPORTED_MEASURES
+from staticfiles import SUPPORTED_MEASURES
 
 
 class CurrentPreConfigModelViewSet(
@@ -55,7 +55,7 @@ class CreatePreConfigModelViewSet(
                 for measure in subcharacteristic["measures"]:
                     metrics_list = [
                         sup_measure[measure["key"]]["metrics"]
-                        for sup_measure in SONARQUBE_SUPPORTED_MEASURES
+                        for sup_measure in SUPPORTED_MEASURES
                         if measure["key"] in sup_measure
                     ]
                     measure.update(
