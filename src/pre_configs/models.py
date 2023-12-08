@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from util import Checker  # util do core
-from util.constants import AGGREGATED_NORMALIZED_MEASURES_MAPPING
+from resources.constants import AGGREGATED_NORMALIZED_MEASURES_MAPPING
 
 import utils
 from characteristics.models import SupportedCharacteristic
